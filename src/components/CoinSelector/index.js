@@ -24,8 +24,18 @@ class CoinSelector extends Component {
     this.setState({ coin: event.target.value })
   }
 
+  sortCoins(coinA, coinB) {
+    if (coinA.name < coinB.name) {
+      return -1;
+    } else if (coinA.name > coinB.name) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
   renderCoins(coinList) {
-    return coinList.map(coin => <option value={coin.symbol}>{coin.name} (${coin.price_usd})</option>)
+    return coinList.sort(this.sortCoins).map(coin => <option value={coin.symbol}>{coin.name} (${coin.price_usd})</option>)
   }
 
   render() {
