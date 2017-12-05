@@ -4,22 +4,35 @@ class CoinSelector extends Component {
   constructor() {
     super();
 
-    this.state = {coin: 'BTC'}
+    this.state = {
+      coin: 'BTC',
+      coincapCoins: []
+    }
 
     this.handleChange = this.handleChange.bind(this)
     // this.props.selectCoin = this.props.selecrCoin.bind(this)
+  }
+
+  componentDidMount() {
+    fetch('https://api.coinmarketcap.com/v1/ticker/')
+      .then(resp => resp.json())
+      .then(coins => this.setState({ coincapCoins: coins })
+      )
   }
 
   handleChange(event) {
     this.setState({ coin: event.target.value })
   }
 
+  renderCoins(coinList) {
+    return coinList.map(coin => <option value={coin.symbol}>{coin.name} (${coin.price_usd})</option>)
+  }
+
   render() {
     return (
       <div className="coin-selector">
         <select value={this.state.coin} onChange={this.handleChange}>
-          <option value="BTC">Bitcoin</option>
-          <option value="LTC">Litecoin</option>
+          {this.renderCoins(this.state.coincapCoins)}
         </select>
         <h2>{this.state.coin}</h2>
       </div>
