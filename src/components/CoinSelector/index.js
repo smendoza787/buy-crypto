@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import './index.css'
 
 class CoinSelector extends Component {
   constructor() {
-    super();
+    super()
 
     this.state = {
-      coin: 'BTC',
+      coin: '',
+      coinObject: {},
       coincapCoins: []
     }
 
@@ -13,41 +15,48 @@ class CoinSelector extends Component {
     // this.props.selectCoin = this.props.selecrCoin.bind(this)
   }
 
-  componentDidMount() {
+  componentWillMount() {
     fetch('https://api.coinmarketcap.com/v1/ticker/')
       .then(resp => resp.json())
-      .then(coins => this.setState({ coincapCoins: coins })
-      )
+      .then(coins => this.setState({ coincapCoins: coins }))
+
+    const selectedCoin = this.state.coincapCoins.find(coin => coin.symbol === this.state.coin)
+    this.setState({ coinObject: selectedCoin })
   }
 
   handleChange(event) {
-    this.setState({ coin: event.target.value })
+    const selectedCoin = this.state.coincapCoins.find(coin => coin.symbol === event.target.value)
+    this.setState({ 
+      coin: event.target.value,
+      coinObject: selectedCoin
+    })
   }
 
-  sortCoins(coinA, coinB) {
-    if (coinA.name < coinB.name) {
-      return -1;
-    } else if (coinA.name > coinB.name) {
-      return 1;
+  sortCoins(a, b) {
+    if (a.name < b.name) {
+      return -1
+    } else if (a.name > b.name) {
+      return 1
     } else {
-      return 0;
+      return 0
     }
   }
 
-  renderCoins(coinList) {
-    return coinList.sort(this.sortCoins).map(coin => <option value={coin.symbol}>{coin.name} (${coin.price_usd})</option>)
+  renderCoinOptions(coinList) {
+    return coinList.sort(this.sortCoins).map(coin => <option value={coin.symbol} key={coin.id}>{coin.name}</option>)
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className="coin-selector">
         <select value={this.state.coin} onChange={this.handleChange}>
-          {this.renderCoins(this.state.coincapCoins)}
+          {this.renderCoinOptions(this.state.coincapCoins)}
         </select>
-        <h2>{this.state.coin}</h2>
+        <h2>{this.state.coinObject && this.state.coinObject.name} {this.state.coinObject && this.state.coinObject.symbol} (${this.state.coinObject && this.state.coinObject.price_usd})</h2>
       </div>
     )
   }
 }
 
-export default CoinSelector;
+export default CoinSelector
