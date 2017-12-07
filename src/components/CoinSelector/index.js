@@ -47,13 +47,12 @@ class CoinSelector extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="coin-selector">
         <select value={this.state.coin} onChange={this.handleChange}>
           {this.renderCoinOptions(this.state.coincapCoins)}
         </select>
-        <h2>{this.state.coinObject && this.state.coinObject.name} {this.state.coinObject && this.state.coinObject.symbol} (${this.state.coinObject && this.state.coinObject.price_usd})</h2>
+        <h2>{this.state.coinObject && this.state.coinObject.symbol} (${this.state.coinObject && this.state.coinObject.price_usd})</h2>
       </div>
     )
   }
