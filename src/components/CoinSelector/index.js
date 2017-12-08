@@ -20,9 +20,12 @@ class CoinSelector extends Component {
   }
 
   handleChange(event) {
-    const selectedCoin = this.props.fetchedCoins.find(coin => coin.symbol === event.target.value)
-    this.props.setCoinName(selectedCoin.name)
-    this.props.selectCoin(selectedCoin)
+    // safety check for the default 'select a coin' value ('null')
+    if (event.target.value !== 'null') {
+      const selectedCoin = this.props.fetchedCoins.find(coin => coin.symbol === event.target.value)
+      this.props.setCoinName(selectedCoin.name)
+      this.props.selectCoin(selectedCoin)
+    }
   }
 
   sortCoins(a, b) {
@@ -44,9 +47,10 @@ class CoinSelector extends Component {
     return (
       <div className="coin-selector">
         <select value={this.props.selectedCoinName} onChange={this.handleChange}>
+          <option selected value="null">Select a coin!</option>
           {this.renderCoinOptions(this.props.fetchedCoins)}
         </select>
-        <h2>{this.props.selectedCoin && this.props.selectedCoin.symbol} (${this.props.selectedCoin && this.props.selectedCoin.price_usd})</h2>
+        <h2>{this.props.selectedCoin && this.props.selectedCoin.symbol} {this.props.selectedCoin && `$(${this.props.selectedCoin.price_usd})`}</h2>
       </div>
     )
   }
