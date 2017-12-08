@@ -10,7 +10,7 @@ class CoinConverter extends Component {
         <h2>with</h2>
         {/* <CurrencyAmountInput /> */}
         {/* <CurrencySelectorDropdown /> */}
-        <h2>Thats enough to buy you:</h2>
+        <h2>That's enough to buy you:</h2>
         {/* <ComputedResults /> */}
       </div>
     )
