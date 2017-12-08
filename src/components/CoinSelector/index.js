@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchCoins, selectCoin, setCoinName } from '../../actions/coinActions'
+import { fetchCoins, selectCoin, setCoinName, changeFinalCoinAmount } from '../../actions/coinActions'
 import './index.css'
 
 class CoinSelector extends Component {
@@ -9,13 +9,11 @@ class CoinSelector extends Component {
     super()
 
     this.handleChange = this.handleChange.bind(this)
-    // this.props.selectCoin = this.props.selectCoin.bind(this)
   }
   
   componentDidMount() {
     this.props.fetchCoins()
     const selectedCoin = this.props.fetchedCoins.find(coin => coin.symbol === 'BTC')
-    // debugger
     this.props.selectCoin(selectedCoin)
   }
 
@@ -25,6 +23,7 @@ class CoinSelector extends Component {
       const selectedCoin = this.props.fetchedCoins.find(coin => coin.symbol === event.target.value)
       this.props.setCoinName(selectedCoin.name)
       this.props.selectCoin(selectedCoin)
+      this.props.changeFinalCoinAmount(this.props.usdPurchaseAmount, selectedCoin.price_usd)
     }
   }
 
@@ -39,18 +38,17 @@ class CoinSelector extends Component {
   }
 
   renderCoinOptions(coinList) {
-    return coinList.sort(this.sortCoins).map(coin => <option value={coin.symbol} key={coin.id}>{coin.name}</option>)
+    return coinList.sort(this.sortCoins).map(coin => <option value={coin.symbol} key={coin.id}>{coin.name} ({coin.symbol})</option>)
   }
 
   render() {
-    console.log("props", this.props);
     return (
       <div className="coin-selector">
         <select value={this.props.selectedCoinName} onChange={this.handleChange}>
-          <option selected value="null">Select a coin!</option>
+          <option selected={true} value="null">Select a coin!</option>
           {this.renderCoinOptions(this.props.fetchedCoins)}
         </select>
-        <h2>{this.props.selectedCoin && this.props.selectedCoin.symbol} {this.props.selectedCoin && `$(${this.props.selectedCoin.price_usd})`}</h2>
+        <h2>{this.props.selectedCoin && 'Current Price: '} {this.props.selectedCoin && `$${this.props.selectedCoin.price_usd}`}</h2>
       </div>
     )
   }
@@ -60,7 +58,8 @@ const mapStateToProps = (state) => {
   return {
     coinName: state.coin.coinName,
     selectedCoin: state.coin.selectedCoin,
-    fetchedCoins: state.coin.fetchedCoins
+    fetchedCoins: state.coin.fetchedCoins,
+    usdPurchaseAmount: state.coin.usdPurchaseAmount
   }
 }
 
@@ -68,7 +67,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     fetchCoins,
     selectCoin,
-    setCoinName
+    setCoinName,
+    changeFinalCoinAmount
   }, dispatch)
 }
 
