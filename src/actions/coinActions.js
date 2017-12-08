@@ -20,3 +20,16 @@ export function setCoinName(coinName) {
     dispatch({ type: 'SET_COIN_NAME', payload: coinName })
   }
 }
+
+export function changeUsdAmount(usdAmount) {
+  return (dispatch) => {
+    dispatch({ type: 'CHANGE_USD_AMOUNT', payload: usdAmount })
+  }
+}
+
+export function changeFinalCoinAmount(usdAmount, coinPrice) {
+  return (dispatch) => {
+    const finalCoinAmount = usdAmount / coinPrice
+    dispatch({ type: 'CHANGE_FINAL_COIN_AMOUNT', payload: finalCoinAmount })
+  }
+}
