@@ -42,13 +42,17 @@ class CoinSelector extends Component {
   }
 
   render() {
+    console.log(this.props.selectedCoin);
     return (
       <div className="coin-selector">
         <select value={this.props.selectedCoinName} onChange={this.handleChange}>
           <option selected={true} value="null">Select a coin!</option>
           {this.renderCoinOptions(this.props.fetchedCoins)}
         </select>
+        {/* CONSIDER CREATING A CoinDetails COMPONENT? */}
         <h2>{this.props.selectedCoin && 'Current Price: '} {this.props.selectedCoin && `$${this.props.selectedCoin.price_usd}`}</h2>
+        <h2>{this.props.selectedCoin && 'Current Market Cap: '} {this.props.selectedCoin && `$${this.props.selectedCoin.market_cap_usd}`}</h2>
+        <h2>{this.props.selectedCoin && '24hr % Change: '} {this.props.selectedCoin && `${this.props.selectedCoin.percent_change_24h}%`}</h2>
       </div>
     )
   }
