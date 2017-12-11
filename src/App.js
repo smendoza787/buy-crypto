@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import Navbar from './components/Navbar'
 import MainHeader from './components/MainHeader'
 import CoinConverter from './components/CoinConverter'
-import './App.css';
+import './App.css'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* <Navbar /> */}
+        <Navbar />
         <div className="main-section">
           <MainHeader />
           <CoinConverter />
@@ -15,8 +16,8 @@ class App extends Component {
         </div>
         {/* <Footer /> */}
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
