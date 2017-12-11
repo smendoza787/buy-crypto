@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Navbar from './components/Navbar'
 import MainHeader from './components/MainHeader'
-import CoinConverter from './components/CoinConverter'
+// import AboutCrypto from './components/AboutCrypto'
+import CoinCalculator from './components/CoinCalculator'
 import './App.css'
 
 class App extends Component {
@@ -11,7 +12,8 @@ class App extends Component {
         <Navbar />
         <div className="main-section">
           <MainHeader />
-          <CoinConverter />
+          {/* <AboutCrypto /> */}
+          <CoinCalculator />
           {/* <BuyingOptions /> */}
         </div>
         {/* <Footer /> */}

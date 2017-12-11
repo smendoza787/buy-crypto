@@ -3,10 +3,10 @@ import CoinSelector from '../CoinSelector'
 import CurrencyAmountInput from '../CurrencyAmountInput'
 import { connect } from 'react-redux'
 
-class CoinConverter extends Component {
+class CoinCalculator extends Component {
   render() {
     return (
-      <div className="coin-converter">
+      <div className="coin-calculator">
         <h2>I want to buy</h2>
         <CoinSelector />
         {/* TODO: Implement additional currencies */}
@@ -27,4 +27,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(CoinConverter)
+export default connect(mapStateToProps)(CoinCalculator)
