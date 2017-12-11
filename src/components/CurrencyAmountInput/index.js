@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { changeUsdAmount, changeFinalCoinAmount } from '../../actions/coinActions'
+import './index.css'
 
 class CurrencyAmountInput extends Component {
   constructor() {
@@ -21,8 +22,7 @@ class CurrencyAmountInput extends Component {
   render() {
     return (
       <div>
-        $<input type="text" value={this.state.value} onChange={this.handleOnChange} />
-        {/* Using && or else NaN will display */}
+        $<input type="text" value={this.state.value} onChange={this.handleOnChange} className="currency-amount-input" />
       </div>
     )
   }
