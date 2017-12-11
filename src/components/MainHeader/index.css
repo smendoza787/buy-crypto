@@ -1,16 +1,25 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 .main-header {
-  background-color: #418dcf;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #2F52DE),
+    color-stop(1, #4CA0FF)
+  );
+  background-image: -o-linear-gradient(bottom, #2F52DE 0%, #4CA0FF 100%);
+  background-image: -moz-linear-gradient(bottom, #2F52DE 0%, #4CA0FF 100%);
+  background-image: -webkit-linear-gradient(bottom, #2F52DE 0%, #4CA0FF 100%);
+  background-image: -ms-linear-gradient(bottom, #2F52DE 0%, #4CA0FF 100%);
+  background-image: linear-gradient(to bottom, #2F52DE 0%, #4CA0FF 100%);
   color: #fff;
   font-size: 2em;
-  height: 90vh;
+  height: 65vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .main-header h1 {
-  font-family: 'Roboto', sans-serif;
   text-shadow: 0 3px 5px #000;
 }

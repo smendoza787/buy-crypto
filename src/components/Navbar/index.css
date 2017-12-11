@@ -1,5 +1,19 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 45px;
+  background-color: #2F52DE;
+}
+
 .links {
   width: 50%;
   display: flex;
   justify-content: space-around;
+}
+
+.links a {
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 3px 3px #000;
 }
